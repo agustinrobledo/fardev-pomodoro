@@ -7,6 +7,11 @@ interface propTask {
 const NewTask = ({ addTask }: propTask) => {
   const [task, setTask] = useState("");
 
+  const handleSubmit = (t: string) => {
+    addTask(t);
+    setTask("");
+  };
+
   return (
     <div className="w-100 flex">
       <input
@@ -18,9 +23,7 @@ const NewTask = ({ addTask }: propTask) => {
       />
       <button
         className="bg-blue p-4  w-1/5 rounded-lg"
-        onClick={() => {
-          addTask(task), setTask("");
-        }}
+        onClick={() => handleSubmit(task)}
       >
         Add
       </button>
