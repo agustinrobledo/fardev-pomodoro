@@ -1,6 +1,5 @@
 import NewTask from "./NewTask";
 import { ITask } from "../types/tasks";
-import { useEffect } from "react";
 import Task from "./Task";
 
 interface propsTasks {
@@ -14,28 +13,23 @@ const Tasks = ({ tasks, onChange }: propsTasks) => {
   };
 
   const updateTask = (task: ITask) => {
+    console.log("updateTask");
     const editedTasks = tasks.map((t) => {
       if (t.id === task.id) {
-        return {
-          ...t,
-          task,
-        };
+        return task;
       } else {
         return t;
       }
     });
+    console.log(editedTasks);
     onChange(editedTasks);
   };
-
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
 
   return (
     <div className="flex flex-col gap-2 mt-4">
       <NewTask addTask={addTask} />
       {tasks.length ? (
-        tasks.map((t) => <Task key={t.id} task={t} onChange={updateTask} />)
+        tasks.map((t) => <Task key={t.id} task={t} onUpdate={updateTask} />)
       ) : (
         <div>No hay tareas pendientes </div>
       )}

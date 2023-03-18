@@ -5,24 +5,26 @@ interface propsTask {
   task: {
     id: number;
     name: string;
-    status: "complete" | "todo" | "doing";
+    status: string;
   };
-  onChange: (t: ITask) => void;
+  onUpdate: (t: ITask) => void;
 }
 
-const Task = ({ task, onChange }: propsTask) => {
-  const [statusOptions, setStatusOptions] = useState([
+interface statusOption {
+  id: number;
+  label: "COMPLETE" | "TODO" | "DOING";
+  value: string;
+}
+
+const Task = ({ task, onUpdate }: propsTask) => {
+  const [statusOptions, setStatusOptions] = useState<statusOption[]>([
     { id: 1, label: "COMPLETE", value: "complete" },
     { id: 2, label: "TODO", value: "todo" },
     { id: 3, label: "DOING", value: "doing" },
   ]);
-  const [state, setState] = useState<ITask>(task);
-
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange({
-      ...task,
-      status: e.target.value,
-    });
+    const { value } = e.target;
+    onUpdate({ ...task, status: value });
   };
 
   return (

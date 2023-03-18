@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 import Tasks from "./Tasks";
-
-interface typeTask {
-  id: number;
-  name: string;
-  status: "complete" | "todo" | "doing";
-}
+import { ITask } from "../types/tasks";
 
 const PomodoroContainer = () => {
-  const [tasks, setTasks] = useState<typeTask[]>(() => {
+  const [tasks, setTasks] = useState<ITask[]>(() => {
     const storedTasks = localStorage.getItem("tasks");
     return storedTasks ? JSON.parse(storedTasks) : [];
   });
-  useEffect(() => {}, []);
+
+  const handleChange = (tasks: ITask[]) => {
+    setTasks(tasks);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
   return (
     <div>
-      <Tasks tasks={tasks} onChange={setTasks} />
+      <Tasks tasks={tasks} onChange={handleChange} />
     </div>
   );
 };
