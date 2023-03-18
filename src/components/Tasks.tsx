@@ -1,52 +1,46 @@
-import { useState } from "react";
 import NewTask from "./NewTask";
+import { ITask } from "../types/tasks";
+import { useEffect } from "react";
+import Task from "./Task";
 
-interface typeTask {
-  id: number;
-  name: string;
-  status: "complete" | "todo" | "doing";
+interface propsTasks {
+  tasks: ITask[];
+  onChange: (tasks: ITask[]) => void;
 }
 
-const Tasks = () => {
-  const [tasks, setTasks] = useState<typeTask[]>(tasksExample);
-
+const Tasks = ({ tasks, onChange }: propsTasks) => {
   const addTask = (task: string) => {
-    setTasks([...tasks, { id: tasks.length, name: task, status: "todo" }]);
+    onChange([...tasks, { id: tasks.length, name: task, status: "todo" }]);
   };
+
+  const updateTask = (task: ITask) => {
+    const editedTasks = tasks.map((t) => {
+      if (t.id === task.id) {
+        return {
+          ...t,
+          task,
+        };
+      } else {
+        return t;
+      }
+    });
+    onChange(editedTasks);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <div className="flex flex-col gap-2 mt-4">
       <NewTask addTask={addTask} />
-      {tasks.length &&
-        tasks.map((t) => (
-          <div
-            key={t.id}
-            className="flex justify-between bg-light-green p-4 rounded-lg text-dark-green"
-          >
-            <span>{t.name}</span>
-            <span>{t.status}</span>
-          </div>
-        ))}
+      {tasks.length ? (
+        tasks.map((t) => <Task key={t.id} task={t} onChange={updateTask} />)
+      ) : (
+        <div>No hay tareas pendientes </div>
+      )}
     </div>
   );
 };
 
 export default Tasks;
-
-const tasksExample: typeTask[] = [
-  {
-    id: 1,
-    name: "Estudiar",
-    status: "doing",
-  },
-  {
-    id: 2,
-    name: "Pushear a git",
-    status: "todo",
-  },
-  {
-    id: 3,
-    name: "Estudiar UX",
-    status: "todo",
-  },
-];

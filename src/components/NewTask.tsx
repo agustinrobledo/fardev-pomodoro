@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-interface propTask {
+interface propsTask {
   addTask: (t: string) => void;
 }
 
-const NewTask = ({ addTask }: propTask) => {
+const NewTask = ({ addTask }: propsTask) => {
   const [task, setTask] = useState("");
 
   const handleSubmit = (t: string) => {
