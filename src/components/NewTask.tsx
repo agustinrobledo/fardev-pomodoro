@@ -1,34 +1,35 @@
-import { useState } from "react";
+import { useState } from "react"
 
 interface propsTask {
-  addTask: (t: string) => void;
+    addTask: (t: string) => void
 }
 
 const NewTask = ({ addTask }: propsTask) => {
-  const [task, setTask] = useState("");
+    const [task, setTask] = useState("")
 
-  const handleSubmit = (t: string) => {
-    addTask(t);
-    setTask("");
-  };
+    const handleSubmit = (t: string) => {
+        addTask(t)
+        setTask("")
+    }
 
-  return (
-    <div className="w-100 flex">
-      <input
-        type="text"
-        placeholder="Make the bed"
-        onChange={(e) => setTask(e.target.value)}
-        value={task}
-        className="bg-light-green  w-4/5 p-4 rounded-lg text-dark-green placeholder:text-blue"
-      />
-      <button
-        className="bg-blue p-4  w-1/5 rounded-lg"
-        onClick={() => handleSubmit(task)}
-      >
-        Add
-      </button>
-    </div>
-  );
-};
+    return (
+        <form className="flex w-3/4 justify-between">
+            <input
+                type="text"
+                placeholder="Make the bed"
+                onChange={(e) => setTask(e.target.value)}
+                value={task}
+                className="w-4/6 rounded-lg border-2 bg-slate-100 p-4 text-dark-green placeholder:text-blue"
+            />
+            <button
+                className="w-1/5 rounded-lg  bg-slate-200"
+                type="submit"
+                onClick={() => handleSubmit(task)}
+            >
+                Add
+            </button>
+        </form>
+    )
+}
 
-export default NewTask;
+export default NewTask

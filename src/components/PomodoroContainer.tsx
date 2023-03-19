@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Tasks from "./Tasks";
 import { ITask, ITime } from "../types/tasks";
 import Timer from "./Timer";
@@ -8,6 +8,7 @@ const PomodoroContainer = () => {
     const storedTasks = localStorage.getItem("tasks");
     return storedTasks ? JSON.parse(storedTasks) : [];
   });
+
   const [time, setTime] = useState<ITime>({
     minutes: 0,
     seconds: 0,
@@ -49,10 +50,15 @@ const PomodoroContainer = () => {
     setTime(t);
   };
 
+  const memoizedTasks = useMemo(
+    () => <Tasks tasks={tasks} onChange={handleChangeTasks} />,
+    [tasks]
+  );
+
   return (
     <div>
       <Timer time={time} setTime={handleChangeTime} />
-      <Tasks tasks={tasks} onChange={handleChangeTasks} />
+      {memoizedTasks}
     </div>
   );
 };
