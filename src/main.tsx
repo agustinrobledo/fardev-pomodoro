@@ -1,11 +1,20 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { RouterProvider } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import "./index.css"
-import router from "./routes"
+import App from "./App"
+import TaskContainer from "./components/TaskContainer"
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
+
+root.render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <BrowserRouter>
+            <Routes>
+                <Route index element={<App />} />
+                <Route path="/task/:id" element={<TaskContainer />} />
+                <Route path="/*" element={<h1>This route doesn't exists</h1>} />
+            </Routes>
+        </BrowserRouter>
     </React.StrictMode>
 )
