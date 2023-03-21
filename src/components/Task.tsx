@@ -1,11 +1,16 @@
 import React, { useState } from "react"
 import { ITask } from "../types/tasks"
+import { Link } from "react-router-dom"
 
 interface propsTask {
     task: {
         id: number
         name: string
         status: string
+        initialTime: {
+            minutes: number
+            seconds: number
+        }
     }
     onUpdate: (t: ITask) => void
 }
@@ -28,8 +33,10 @@ const Task = ({ task, onUpdate }: propsTask) => {
     }
 
     return (
-        <div className="flex w-3/4 justify-between rounded-lg border-2 border-black bg-slate-100  p-4 font-semibold text-dark-green duration-100 ease-in hover:scale-110">
-            <span className="font-semibold">{task.name}</span>
+        <div className="flex w-3/4 justify-between rounded-lg border-2 border-black bg-slate-100  p-4 font-semibold text-dark-green duration-100 ease-in hover:scale-105">
+            <Link to={`task/${task.id}`}>
+                <span className="font-semibold">{task.name}</span>
+            </Link>
             <select
                 className="bg-transparent focus:outline-none active:border-none"
                 name="status"

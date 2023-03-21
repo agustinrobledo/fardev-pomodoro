@@ -11,7 +11,12 @@ const Tasks = ({ tasks, onChange }: propsTasks) => {
     const addTask = (task: string) => {
         onChange([
             ...tasks,
-            { id: tasks.length + 1, name: task, status: "todo" },
+            {
+                id: tasks.length + 1,
+                name: task,
+                status: "todo",
+                initialTime: { minutes: 25, seconds: 0 },
+            },
         ])
     }
 

@@ -6,6 +6,10 @@ const useGetTask = (id: number) => {
         id: 0,
         name: "",
         status: "",
+        initialTime: {
+            minutes: 0,
+            seconds: 0,
+        },
     })
     const [error, setError] = useState({
         message: "",
@@ -19,7 +23,9 @@ const useGetTask = (id: number) => {
                 const taskIndex = tasks.findIndex((t) => t.id === id)
                 taskIndex !== -1
                     ? setTask(tasks[taskIndex])
-                    : setError({ message: `Task with id:${id} doesn't exists` })
+                    : setError({
+                          message: `Task with id: ${id} doesn't exists`,
+                      })
             } else {
                 setError({ message: "You doesn't add tasks!" })
             }
