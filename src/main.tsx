@@ -12,7 +12,7 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route index element={<App />} />
-                <Route path="/task/:id" element={<TaskContainer />} />
+                <Route path="/task/:taskId" element={<TaskContainer />} />
                 <Route path="/*" element={<h1>This route doesn't exists</h1>} />
             </Routes>
         </BrowserRouter>

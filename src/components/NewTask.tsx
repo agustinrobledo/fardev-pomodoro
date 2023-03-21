@@ -7,7 +7,8 @@ interface propsTask {
 const NewTask = ({ addTask }: propsTask) => {
     const [task, setTask] = useState("")
 
-    const handleSubmit = (t: string) => {
+    const handleSubmit = (e: React.FormEvent, t: string) => {
+        e.preventDefault()
         addTask(t)
         setTask("")
     }
@@ -24,7 +25,7 @@ const NewTask = ({ addTask }: propsTask) => {
             <button
                 className="w-1/5 rounded-lg  bg-slate-200"
                 type="submit"
-                onClick={() => handleSubmit(task)}
+                onClick={(e) => handleSubmit(e, task)}
             >
                 Add
             </button>

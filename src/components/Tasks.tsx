@@ -9,7 +9,10 @@ interface propsTasks {
 
 const Tasks = ({ tasks, onChange }: propsTasks) => {
     const addTask = (task: string) => {
-        onChange([...tasks, { id: tasks.length, name: task, status: "todo" }])
+        onChange([
+            ...tasks,
+            { id: tasks.length + 1, name: task, status: "todo" },
+        ])
     }
 
     const updateTask = (task: ITask) => {
