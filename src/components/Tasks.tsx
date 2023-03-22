@@ -32,12 +32,14 @@ const Tasks = ({ tasks, onChange }: propsTasks) => {
     }
 
     return (
-        <div className="mt-4 flex flex-col  items-center gap-2">
+        <div className="mt-4 flex flex-col items-center gap-11">
             <NewTask addTask={addTask} />
             {tasks.length ? (
-                tasks.map((t) => (
-                    <Task key={t.id} task={t} onUpdate={updateTask} />
-                ))
+                <div className="flex w-3/4 flex-wrap justify-between gap-16 bg-red-300">
+                    {tasks.map((t) => (
+                        <Task key={t.id} task={t} onUpdate={updateTask} />
+                    ))}
+                </div>
             ) : (
                 <div>No hay tareas pendientes </div>
             )}

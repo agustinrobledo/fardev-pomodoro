@@ -33,11 +33,9 @@ const Task = ({ task, onUpdate }: propsTask) => {
     }
 
     return (
-        <div className="flex w-3/4 justify-between rounded-lg border-2 border-black bg-slate-100  p-4 font-semibold text-dark-green duration-100 ease-in hover:scale-105">
-            <Link to={`task/${task.id}`}>
-                <span className="font-semibold">{task.name}</span>
-            </Link>
-            <select
+        <div className="flex h-40 w-40 flex-col justify-between rounded-lg border-2 border-black bg-slate-100  p-4 font-semibold text-dark-green duration-100 ease-in hover:scale-105">
+            <span className="font-semibold">{task.name}</span>
+            {/* <select
                 className="bg-transparent focus:outline-none active:border-none"
                 name="status"
                 value={task.status}
@@ -48,7 +46,12 @@ const Task = ({ task, onUpdate }: propsTask) => {
                         {option.label}
                     </option>
                 ))}
-            </select>
+            </select> */}
+            <Link to={`task/${task.id}`}>
+                <div className="flex justify-end">
+                    <div className="h-16 w-16 rounded-full bg-black"></div>
+                </div>
+            </Link>
         </div>
     )
 }
