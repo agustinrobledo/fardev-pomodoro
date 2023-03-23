@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import gsap from "gsap"
 
 interface IQuote {
     text: string
@@ -10,31 +11,49 @@ const Quote = () => {
         text: "",
         author: "",
     })
-    console.log(import.meta.env.VITE_API_KEY)
+    const [isLoading, setIsLoading] = useState(false)
 
-    const [error, setError] = useState({
-        message: "",
-    })
+    const container = useRef<HTMLDivElement>(null)
+
+    useLayoutEffect(() => {
+        if (container.current !== null) {
+            const ctx = gsap.context(() => {
+                gsap.from(container.current, { y: -100 })
+            }, container)
+            return () => ctx.revert()
+        }
+    }, [quote])
 
     useEffect(() => {
         const getQuote = async () => {
             try {
+                setIsLoading(true)
+
                 const res = await fetch("https://type.fit/api/quotes")
                 const q: IQuote[] = await res.json()
                 const randomQuote = q[Math.floor(Math.random() * q.length)]
-                console.log(randomQuote)
+
                 setQuote(randomQuote)
             } catch (e) {
                 console.log(e)
+            } finally {
+                setIsLoading(false)
             }
         }
         getQuote()
     }, [])
     return (
-        <div className="flex flex-col gap-2 bg-green-500 p-10 text-2xl text-white">
-            <p>{quote.text}</p>
-            <p>{quote.author ? `- ${quote.author}.` : null}</p>
-        </div>
+        <>
+            {quote.text ? (
+                <div
+                    ref={container}
+                    className="flex flex-col gap-2 bg-green-500 p-10 text-2xl text-white"
+                >
+                    <p>{quote.text}</p>
+                    <p>{quote.author ? `- ${quote.author}.` : null}</p>
+                </div>
+            ) : null}
+        </>
     )
 }
 

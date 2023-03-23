@@ -17,7 +17,7 @@ const PomodoroContainer = () => {
     }, [tasks])
 
     return (
-        <div>
+        <div className="h-full">
             <Tasks tasks={tasks} onChange={handleChangeTasks} />
         </div>
     )

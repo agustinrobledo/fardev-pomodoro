@@ -1,6 +1,8 @@
 import NewTask from "./NewTask"
 import { ITask } from "../types/tasks"
 import Task from "./Task"
+import { useLayoutEffect, useRef } from "react"
+import { gsap } from "gsap"
 
 interface propsTasks {
     tasks: ITask[]
@@ -8,6 +10,8 @@ interface propsTasks {
 }
 
 const Tasks = ({ tasks, onChange }: propsTasks) => {
+    const tasksContainer = useRef<HTMLDivElement>(null)
+
     const addTask = (task: string) => {
         onChange([
             ...tasks,
@@ -32,17 +36,22 @@ const Tasks = ({ tasks, onChange }: propsTasks) => {
     }
 
     return (
-        <div className="mt-4 flex flex-col items-center gap-11">
-            <NewTask addTask={addTask} />
+        <div className="flex h-full flex-col items-center gap-11">
             {tasks.length ? (
-                <div className="flex w-3/4 flex-wrap justify-between gap-16 bg-red-300">
+                <div
+                    ref={tasksContainer}
+                    className="grid h-3/4 w-3/4 grid-cols-3 content-center justify-items-center gap-7 overflow-y-auto overflow-x-hidden bg-red-300"
+                >
                     {tasks.map((t) => (
                         <Task key={t.id} task={t} onUpdate={updateTask} />
                     ))}
                 </div>
             ) : (
-                <div>No hay tareas pendientes </div>
+                <div className="flex h-3/4 items-center">
+                    <span>No hay tareas pendientes</span>
+                </div>
             )}
+            <NewTask addTask={addTask} />
         </div>
     )
 }
