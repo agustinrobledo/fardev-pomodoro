@@ -4,8 +4,8 @@ import TaskContainer from "./TaskContainer"
 const TaskDetail = () => {
     return (
         <div>
-            <TaskContainer />
             <Quote />
+            <TaskContainer />
         </div>
     )
 }

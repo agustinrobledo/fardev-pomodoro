@@ -31,9 +31,9 @@ const Quote = () => {
         getQuote()
     }, [])
     return (
-        <div>
+        <div className="flex flex-col gap-2 bg-green-500 p-10 text-2xl text-white">
             <p>{quote.text}</p>
-            <p>{quote.author ? quote.author : null}</p>
+            <p>{quote.author ? `- ${quote.author}.` : null}</p>
         </div>
     )
 }
