@@ -54,11 +54,6 @@ const Task = ({ task, onUpdate }: propsTask) => {
         }
     }, [])
 
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const { value } = e.target
-        onUpdate({ ...task, status: value })
-    }
-
     return (
         <Link
             ref={container}

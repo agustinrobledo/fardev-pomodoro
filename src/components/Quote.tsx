@@ -47,7 +47,7 @@ const Quote = () => {
             {quote.text ? (
                 <div
                     ref={container}
-                    className="flex flex-col gap-2 bg-green-500 p-10 text-2xl text-white"
+                    className="flex h-1/4 flex-col gap-2 bg-green-600 p-10 text-2xl text-white"
                 >
                     <p>{quote.text}</p>
                     <p>{quote.author ? `- ${quote.author}.` : null}</p>

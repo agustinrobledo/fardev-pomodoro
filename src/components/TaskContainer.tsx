@@ -58,10 +58,10 @@ const TaskContainer = () => {
             {error.message.length ? (
                 <div>{error.message}</div>
             ) : (
-                <>
-                    <Timer time={time} setTime={handleChangeTime} />
+                <div className="flex flex-col items-center justify-center pt-6 text-4xl">
                     <div>{task?.name}</div>
-                </>
+                    <Timer time={time} setTime={handleChangeTime} />
+                </div>
             )}
         </>
     )

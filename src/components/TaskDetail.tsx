@@ -3,7 +3,7 @@ import TaskContainer from "./TaskContainer"
 
 const TaskDetail = () => {
     return (
-        <div>
+        <div className="h-screen bg-slate-400">
             <Quote />
             <TaskContainer />
         </div>

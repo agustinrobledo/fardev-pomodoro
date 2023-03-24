@@ -40,7 +40,7 @@ const Tasks = ({ tasks, onChange }: propsTasks) => {
             {tasks.length ? (
                 <div
                     ref={tasksContainer}
-                    className="grid h-3/4 w-3/4 grid-cols-3 content-center justify-items-center gap-7 overflow-y-auto overflow-x-hidden bg-red-300"
+                    className="grid h-3/4 w-3/4 grid-cols-3 content-center justify-items-center gap-7 overflow-y-auto overflow-x-hidden"
                 >
                     {tasks.map((t) => (
                         <Task key={t.id} task={t} onUpdate={updateTask} />
