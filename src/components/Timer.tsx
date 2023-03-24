@@ -64,7 +64,7 @@ const Timer = ({ time, setTime }: timerProps) => {
                 />
             </div>
             <div className="w-70 flex gap-3 text-2xl">
-                <Button onClick={onPlay}>
+                <Button onClick={onPlay} isActive={time.isPlaying}>
                     <svg
                         className="h-5 w-5"
                         width="15"
@@ -81,7 +81,7 @@ const Timer = ({ time, setTime }: timerProps) => {
                         ></path>
                     </svg>
                 </Button>
-                <Button onClick={onPause}>
+                <Button onClick={onPause} isActive={time.isPlaying}>
                     <svg
                         className="h-5 w-5"
                         width="15"
@@ -98,7 +98,7 @@ const Timer = ({ time, setTime }: timerProps) => {
                         ></path>
                     </svg>
                 </Button>
-                <Button onClick={onReset}>
+                <Button onClick={onReset} isActive={time.isFinished}>
                     <svg
                         className="h-5 w-5"
                         width="15"

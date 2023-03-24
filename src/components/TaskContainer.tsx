@@ -3,7 +3,6 @@ import useGetTask from "../hooks/useGetTask"
 import Timer from "./Timer"
 import { ITime } from "../types/tasks"
 import { useEffect, useState } from "react"
-import Quote from "./Quote"
 
 const TaskContainer = () => {
     const { taskId } = useParams()
@@ -58,7 +57,7 @@ const TaskContainer = () => {
             {error.message.length ? (
                 <div>{error.message}</div>
             ) : (
-                <div className="flex flex-col items-center justify-center pt-6 text-4xl">
+                <div className="flex h-3/4 flex-col items-center justify-end align-bottom text-4xl">
                     <div>{task?.name}</div>
                     <Timer time={time} setTime={handleChangeTime} />
                 </div>

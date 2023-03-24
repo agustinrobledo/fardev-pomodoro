@@ -1,8 +1,9 @@
 interface buttonProps {
     onClick: () => void
     children: React.ReactNode
+    isActive: boolean
 }
-const Button = ({ onClick, children }: buttonProps) => {
+const Button = ({ onClick, children, isActive }: buttonProps) => {
     return (
         <button
             onClick={onClick}

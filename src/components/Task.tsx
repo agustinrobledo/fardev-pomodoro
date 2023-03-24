@@ -33,16 +33,16 @@ const Task = ({ task, onUpdate }: propsTask) => {
 
     useLayoutEffect(() => {
         if (container.current !== null) {
-            let hover = gsap.to(container.current, {
-                scale: 1.1,
-                duration: 0.5,
-                paused: true,
-                ease: "power1.inOut",
-            })
-            container.current.addEventListener("mouseenter", () => hover.play())
-            container.current.addEventListener("mouseleave", () =>
-                hover.reverse()
-            )
+            // let hover = gsap.to(container.current, {
+            //     scale: 1.1,
+            //     duration: 0.5,
+            //     paused: true,
+            //     ease: "power1.inOut",
+            // })
+            // container.current.addEventListener("mouseenter", () => hover.play())
+            // container.current.addEventListener("mouseleave", () =>
+            //     hover.reverse()
+            // )
             const ctx = gsap.context(() => {
                 gsap.from(container.current, {
                     y: -100,
@@ -58,9 +58,16 @@ const Task = ({ task, onUpdate }: propsTask) => {
         <Link
             ref={container}
             to={`task/${task.id}`}
-            className="task h-100 mt-4 flex h-64 w-3/4 flex-col justify-between rounded-lg border-2 border-black bg-slate-100 p-4  text-2xl font-semibold text-dark-green"
+            className="group relative col-auto h-64 w-full flex-shrink-0 p-6 text-4xl"
         >
-            <span className="font-semibold">{task.name}</span>
+            <span className="absolute inset-0 h-full w-full translate-x-1 translate-y-1 transform rounded-lg bg-black transition duration-200 ease-out group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+            <span className="absolute inset-0 h-full w-full rounded-lg border-2 border-black bg-white group-hover:bg-white"></span>
+            <span className="relative flex h-full flex-col rounded-lg text-black group-hover:text-black">
+                <span className="flex h-1/4 justify-end">x</span>
+                <p className="h-3/4 truncate text-left font-medium">
+                    {task.name}
+                </p>
+            </span>
         </Link>
     )
 }

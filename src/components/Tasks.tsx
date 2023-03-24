@@ -1,8 +1,7 @@
 import NewTask from "./NewTask"
 import { ITask } from "../types/tasks"
 import Task from "./Task"
-import { useLayoutEffect, useRef } from "react"
-import { gsap } from "gsap"
+import { useRef } from "react"
 
 interface propsTasks {
     tasks: ITask[]
@@ -40,7 +39,7 @@ const Tasks = ({ tasks, onChange }: propsTasks) => {
             {tasks.length ? (
                 <div
                     ref={tasksContainer}
-                    className="grid h-3/4 w-3/4 grid-cols-3 content-center justify-items-center gap-7 overflow-y-auto overflow-x-hidden"
+                    className="flex h-3/4 w-3/4 flex-nowrap content-center items-center gap-20 overflow-visible overflow-x-auto overflow-y-hidden  pl-20 md:grid md:h-3/4 md:w-3/4 md:grid-cols-2 md:justify-items-center md:gap-7 md:overflow-y-auto md:overflow-x-hidden md:pl-0"
                 >
                     {tasks.map((t) => (
                         <Task key={t.id} task={t} onUpdate={updateTask} />

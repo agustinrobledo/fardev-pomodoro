@@ -16,9 +16,13 @@ const Quote = () => {
     const container = useRef<HTMLDivElement>(null)
 
     useLayoutEffect(() => {
-        if (container.current !== null) {
+        if (container.current !== null && quote.text.length > 0) {
             const ctx = gsap.context(() => {
-                gsap.from(container.current, { y: -100 })
+                gsap.from(container.current, {
+                    opacity: 0,
+                    y: -100,
+                    duration: 0.6,
+                })
             }, container)
             return () => ctx.revert()
         }
@@ -47,7 +51,7 @@ const Quote = () => {
             {quote.text ? (
                 <div
                     ref={container}
-                    className="flex h-1/4 flex-col gap-2 bg-green-600 p-10 text-2xl text-white"
+                    className="absolute flex h-1/4 w-full flex-col gap-2 bg-red p-10 text-2xl text-black"
                 >
                     <p>{quote.text}</p>
                     <p>{quote.author ? `- ${quote.author}.` : null}</p>
