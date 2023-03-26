@@ -13,7 +13,33 @@ module.exports = {
                 white: "#d6d1c1",
                 yellow: "#dfae35",
             },
+            keyframes: {
+                slideDown: {
+                    from: {
+                        height: 0,
+                    },
+                    to: {
+                        height: "var(--radix-accordion-content-width)",
+                    },
+                },
+                slideUp: {
+                    from: {
+                        height: "var(--radix-accordion-content-width)",
+                    },
+                    to: {
+                        height: 0,
+                    },
+                },
+            },
+            animation: {
+                slideDown: "slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)",
+                slideUp: "slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)",
+            },
         },
     },
-    plugins: [],
+    plugins: [
+        require("tailwindcss-radix")({
+            variantPrefix: "rdx",
+        }),
+    ],
 }

@@ -1,18 +1,31 @@
-import React, { useState } from "react"
+import { gsap } from "gsap"
+import React, { useLayoutEffect, useRef, useState } from "react"
 
 interface taskFormProps {
     addTask: (t: string) => void
 }
 const TaskForm = ({ addTask }: taskFormProps) => {
     const [task, setTask] = useState("")
+    const formRef = useRef(null)
     const handleSubmit = (e: React.FormEvent, t: string) => {
         e.preventDefault()
         addTask(t)
         setTask("")
     }
+    // useLayoutEffect(() => {
+    //     if (formRef.current) {
+    //         const ctx = gsap.context(() => {
+    //             gsap.from(formRef.current, { opacity: 0 })
+    //         }, formRef)
+    //         return () => ctx.revert()
+    //     }
+    // }, [])
 
     return (
-        <form className="flex h-40 w-full flex-col items-center justify-center gap-4 bg-red align-middle">
+        <form
+            ref={formRef}
+            className="flex h-40 w-full flex-col items-center justify-center gap-4 bg-red align-middle"
+        >
             <label htmlFor="task" className="w-4/6 ">
                 <input
                     type="text"
