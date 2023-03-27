@@ -9,8 +9,6 @@ interface propsTasks {
 }
 
 const Tasks = ({ tasks, onChange }: propsTasks) => {
-    const tasksContainer = useRef<HTMLDivElement>(null)
-
     const addTask = (task: string) => {
         onChange([
             ...tasks,
@@ -35,18 +33,15 @@ const Tasks = ({ tasks, onChange }: propsTasks) => {
     }
 
     return (
-        <div className="flex h-full flex-col items-center gap-11">
+        <div className="flex h-full flex-col items-center gap-4">
             {tasks.length ? (
-                <div
-                    ref={tasksContainer}
-                    className="flex h-3/4 w-3/4 flex-nowrap content-center items-center gap-20 overflow-visible overflow-x-auto overflow-y-hidden  pl-20 md:grid md:h-3/4 md:w-3/4 md:grid-cols-2 md:justify-items-center md:gap-7 md:overflow-y-auto md:overflow-x-hidden md:pl-0"
-                >
+                <div className="flex h-3/5 w-4/5 flex-col items-center gap-2 overflow-auto">
                     {tasks.map((t) => (
                         <Task key={t.id} task={t} onUpdate={updateTask} />
                     ))}
                 </div>
             ) : (
-                <div className="flex h-3/4 items-center">
+                <div className="flex h-3/5 items-center">
                     <span>No hay tareas pendientes</span>
                 </div>
             )}

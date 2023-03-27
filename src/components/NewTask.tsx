@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react"
+import { useLayoutEffect, useRef, useState } from "react"
 import TaskForm from "./TaskForm"
 import * as Accordion from "@radix-ui/react-accordion"
 import { gsap } from "gsap"
@@ -8,20 +8,33 @@ interface propsTask {
 }
 
 const NewTask = ({ addTask }: propsTask) => {
+    const [showForm, setShowForm] = useState(false)
+    const buttonRef = useRef<HTMLButtonElement>(null)
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (showForm) {
+            gsap.from(e.currentTarget, {
+                y: -100,
+            })
+            setShowForm(!showForm)
+        } else {
+            gsap.from(e.currentTarget, {
+                y: 100,
+            })
+            setShowForm(!showForm)
+        }
+    }
+
     return (
-        <div className="flex max-h-full w-3/4 justify-center">
-            <Accordion.Root className="w-full" type="single" collapsible>
-                <Accordion.Item value="item-1">
-                    <Accordion.Header className="flex justify-center">
-                        <Accordion.Trigger value="item-1">
-                            Add new task
-                        </Accordion.Trigger>
-                    </Accordion.Header>
-                    <Accordion.Content className="max-h-36 overflow-hidden rdx-state-closed:animate-slideUp rdx-state-open:animate-slideDown">
-                        <TaskForm addTask={addTask} />
-                    </Accordion.Content>
-                </Accordion.Item>
-            </Accordion.Root>
+        <div className="flex h-2/5 w-3/4 flex-col justify-center">
+            <button
+                ref={buttonRef}
+                className="task-button"
+                onClick={handleClick}
+            >
+                Add new task
+            </button>
+            {showForm ? <TaskForm addTask={addTask} /> : null}
         </div>
     )
 }

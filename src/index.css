@@ -1,4 +1,26 @@
 @tailwind base;
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 9px;
+}
+
+*::-webkit-scrollbar-track {
+    background: black;
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 14px;
+    border: none;
+}
+
 @tailwind components;
 @tailwind utilities;
 
@@ -7,7 +29,8 @@
 }
 
 body {
-    background-color: beige;
+    background-color: black;
+    color: white;
 }
 
 input::-webkit-outer-spin-button,

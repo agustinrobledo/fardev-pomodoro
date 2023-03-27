@@ -58,16 +58,9 @@ const Task = ({ task, onUpdate }: propsTask) => {
         <Link
             ref={container}
             to={`task/${task.id}`}
-            className="group relative col-auto h-64 w-full flex-shrink-0 p-6 text-4xl"
+            className="w-3/4 rounded-lg bg-white p-4 text-black"
         >
-            <span className="absolute inset-0 h-full w-full translate-x-1 translate-y-1 transform rounded-lg bg-black transition duration-200 ease-out group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-            <span className="absolute inset-0 h-full w-full rounded-lg border-2 border-black bg-white group-hover:bg-white"></span>
-            <span className="relative flex h-full flex-col rounded-lg text-black group-hover:text-black">
-                <span className="flex h-1/4 justify-end">x</span>
-                <p className="h-3/4 truncate text-left font-medium">
-                    {task.name}
-                </p>
-            </span>
+            <p className="">{task.name}</p>
         </Link>
     )
 }
