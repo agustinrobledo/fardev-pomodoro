@@ -33,21 +33,13 @@ const Task = ({ task, onUpdate }: propsTask) => {
 
     useLayoutEffect(() => {
         if (container.current !== null) {
-            // let hover = gsap.to(container.current, {
-            //     scale: 1.1,
-            //     duration: 0.5,
-            //     paused: true,
-            //     ease: "power1.inOut",
-            // })
-            // container.current.addEventListener("mouseenter", () => hover.play())
-            // container.current.addEventListener("mouseleave", () =>
-            //     hover.reverse()
-            // )
             const ctx = gsap.context(() => {
                 gsap.from(container.current, {
-                    y: -100,
+                    x: -100,
+                    duration: 1,
                     opacity: 0,
-                    stagger: 0.5,
+                    ease: "none",
+                    stagger: 0.3,
                 })
             }, container)
             return () => ctx.revert()
@@ -58,7 +50,7 @@ const Task = ({ task, onUpdate }: propsTask) => {
         <Link
             ref={container}
             to={`task/${task.id}`}
-            className="w-3/4 rounded-lg bg-white p-4 text-black"
+            className="task w-3/4 rounded-lg bg-white p-4 text-black"
         >
             <p className="">{task.name}</p>
         </Link>

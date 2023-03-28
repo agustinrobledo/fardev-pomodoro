@@ -33,7 +33,7 @@ const Tasks = ({ tasks, onChange }: propsTasks) => {
     }
 
     return (
-        <div className="flex h-full flex-col items-center gap-4">
+        <div className="flex h-full flex-col items-center gap-4 py-6">
             {tasks.length ? (
                 <div className="flex h-3/5 w-4/5 flex-col items-center gap-2 overflow-auto">
                     {tasks.map((t) => (
