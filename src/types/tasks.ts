@@ -13,3 +13,11 @@ export interface ITime {
     isPlaying: boolean
     isFinished: boolean
 }
+
+export interface IAddedTask {
+    initialTime: {
+        minutes: string
+        seconds: string
+    }
+    name: string
+}

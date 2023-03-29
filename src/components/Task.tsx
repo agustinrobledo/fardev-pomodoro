@@ -35,11 +35,10 @@ const Task = ({ task, onUpdate }: propsTask) => {
         if (container.current !== null) {
             const ctx = gsap.context(() => {
                 gsap.from(container.current, {
-                    x: -100,
-                    duration: 1,
+                    y: -100,
+                    duration: 0.5,
                     opacity: 0,
                     ease: "none",
-                    stagger: 0.3,
                 })
             }, container)
             return () => ctx.revert()
@@ -50,9 +49,12 @@ const Task = ({ task, onUpdate }: propsTask) => {
         <Link
             ref={container}
             to={`task/${task.id}`}
-            className="task w-3/4 rounded-lg bg-white p-4 text-black"
+            className="task flex w-4/5 justify-between rounded-lg bg-white p-4 text-black"
         >
             <p className="">{task.name}</p>
+            <p>
+                {task.initialTime.minutes}:{task.initialTime.seconds}
+            </p>
         </Link>
     )
 }

@@ -1,12 +1,22 @@
 import { gsap } from "gsap"
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react"
+import React, { useLayoutEffect, useRef, useState } from "react"
+import { IAddedTask } from "../types/tasks"
 
 interface taskFormProps {
-    addTask: (t: string) => void
+    addTask: (t: IAddedTask) => void
     onShow: boolean
+    setOnShow: (a: boolean) => void
 }
-const TaskForm = ({ addTask, onShow }: taskFormProps) => {
-    const [task, setTask] = useState("")
+const TaskForm = ({ addTask, onShow, setOnShow }: taskFormProps) => {
+    const [name, setName] = useState("")
+    const [initialTime, setInitialTime] = useState({
+        minutes: "01",
+        seconds: "00",
+    })
+    const [error, setError] = useState({
+        message: "",
+    })
+
     const formRef = useRef(null)
 
     useLayoutEffect(() => {
@@ -25,23 +35,44 @@ const TaskForm = ({ addTask, onShow }: taskFormProps) => {
         }
     }, [onShow])
 
-    const handleSubmit = (e: React.FormEvent, t: string) => {
+    const handleChangeTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value, name } = e.target
+
+        setInitialTime({
+            ...initialTime,
+            [name]: Number(value) < 10 ? "0" + value : value,
+        })
+    }
+
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        addTask(t)
-        setTask("")
+        if (name.length > 0) {
+            addTask({ name, initialTime })
+            setOnShow(false)
+            setName("")
+            setError({ message: "" })
+        } else {
+            setError({ message: "This field is required" })
+            return
+        }
     }
 
     return (
         <div ref={formRef}>
             <form className="form flex w-full flex-col text-lg">
-                <label htmlFor="task">
+                <label htmlFor="task" className="flex flex-col">
                     <input
                         type="text"
                         placeholder="Study English..."
-                        onChange={(e) => setTask(e.target.value)}
-                        value={task}
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
                         className="bg-transparent p-4 placeholder:text-white focus:outline-none"
                     />
+                    {error.message.length ? (
+                        <span className="pl-4 pb-6 text-sm text-red">
+                            {error.message}
+                        </span>
+                    ) : null}
                 </label>
                 <label className="pl-4">Time</label>
                 <div className="flex items-center justify-center">
@@ -51,7 +82,9 @@ const TaskForm = ({ addTask, onShow }: taskFormProps) => {
                         placeholder="25"
                         max={59}
                         min={1}
-                        className="bg-transparent p-6 text-xl placeholder:text-white focus:outline-none"
+                        onChange={handleChangeTime}
+                        value={initialTime.minutes}
+                        className="bg-transparent p-6 text-center text-xl placeholder:text-white focus:outline-none"
                     />
                     <span>:</span>
                     <input
@@ -60,13 +93,15 @@ const TaskForm = ({ addTask, onShow }: taskFormProps) => {
                         name="seconds"
                         max={59}
                         min={0}
-                        className="bg-transparent p-6 text-xl placeholder:text-white focus:outline-none"
+                        onChange={handleChangeTime}
+                        value={initialTime.seconds}
+                        className="bg-transparent  p-6 text-center text-xl placeholder:text-white focus:outline-none"
                     />
                 </div>
                 <button
-                    className="rounded-lg bg-white py-2 text-lg text-black"
+                    className="rounded-lg bg-white py-2 text-center text-lg text-black"
                     type="submit"
-                    onClick={(e) => handleSubmit(e, task)}
+                    onClick={(e) => handleSubmit(e)}
                 >
                     Add task
                 </button>

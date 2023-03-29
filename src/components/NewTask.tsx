@@ -1,30 +1,17 @@
-import { useLayoutEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import TaskForm from "./TaskForm"
-import * as Accordion from "@radix-ui/react-accordion"
-import { gsap } from "gsap"
+import { IAddedTask } from "../types/tasks"
 
 interface propsTask {
-    addTask: (t: string) => void
+    addTask: (t: IAddedTask) => void
 }
 
 const NewTask = ({ addTask }: propsTask) => {
-    const [showForm, setShowForm] = useState(false)
+    const [showForm, setShowForm] = useState(true)
     const buttonRef = useRef<HTMLButtonElement>(null)
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         setShowForm(!showForm)
-        // if (showForm) {
-        //     gsap.from(e.currentTarget, {
-        //         y: -100,
-        //     })
-
-        //     setShowForm(!showForm)
-        // } else {
-        //     gsap.from(e.currentTarget, {
-        //         y: 100,
-        //     })
-        //     setShowForm(!showForm)
-        // }
     }
 
     return (
@@ -36,7 +23,11 @@ const NewTask = ({ addTask }: propsTask) => {
             >
                 Add new task
             </button>
-            <TaskForm onShow={showForm} addTask={addTask} />
+            <TaskForm
+                setOnShow={setShowForm}
+                onShow={showForm}
+                addTask={addTask}
+            />
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import NewTask from "./NewTask"
-import { ITask } from "../types/tasks"
+import { IAddedTask, ITask } from "../types/tasks"
 import Task from "./Task"
 import { useRef } from "react"
 
@@ -9,14 +9,14 @@ interface propsTasks {
 }
 
 const Tasks = ({ tasks, onChange }: propsTasks) => {
-    const addTask = (task: string) => {
+    const addTask = (task: IAddedTask) => {
         onChange([
             ...tasks,
             {
                 id: tasks.length + 1,
-                name: task,
                 status: "todo",
-                initialTime: { minutes: 25, seconds: 0 },
+                name: task.name,
+                initialTime: task.initialTime,
             },
         ])
     }
@@ -35,7 +35,7 @@ const Tasks = ({ tasks, onChange }: propsTasks) => {
     return (
         <div className="flex h-full flex-col items-center gap-4 py-6">
             {tasks.length ? (
-                <div className="flex h-3/5 w-4/5 flex-col items-center gap-2 overflow-auto">
+                <div className="flex h-3/5 w-full flex-col items-center gap-2 overflow-auto">
                     {tasks.map((t) => (
                         <Task key={t.id} task={t} onUpdate={updateTask} />
                     ))}
