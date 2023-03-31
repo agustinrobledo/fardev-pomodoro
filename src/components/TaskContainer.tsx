@@ -9,8 +9,8 @@ const TaskContainer = () => {
     const { error, task } = useGetTask(Number(taskId))
 
     const [time, setTime] = useState<ITime>({
-        minutes: 0,
-        seconds: 0,
+        minutes: "0",
+        seconds: "0",
         isPlaying: false,
         isFinished: false,
     })
@@ -26,18 +26,21 @@ const TaskContainer = () => {
         let interval: number | undefined
         if (time.isPlaying) {
             interval = window.setInterval(() => {
-                if (time.seconds > 0) {
-                    setTime({ ...time, seconds: time.seconds - 1 })
+                if (Number(time.seconds) > 0) {
+                    setTime({
+                        ...time,
+                        seconds: (Number(time.seconds) - 1).toString(),
+                    })
                 }
-                if (time.seconds === 0) {
-                    if (time.minutes === 0) {
+                if (Number(time.seconds) === 0) {
+                    if (Number(time.minutes) === 0) {
                         clearInterval(interval)
                         setTime({ ...time, isFinished: true })
                     } else {
                         setTime({
                             ...time,
-                            minutes: time.minutes - 1,
-                            seconds: 59,
+                            minutes: (Number(time.minutes) - 1).toString(),
+                            seconds: "59",
                         })
                     }
                 }

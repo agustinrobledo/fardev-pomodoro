@@ -3,13 +3,13 @@ export interface ITask {
     name: string
     status: string
     initialTime: {
-        minutes: number
-        seconds: number
+        minutes: string
+        seconds: string
     }
 }
 export interface ITime {
-    minutes: number
-    seconds: number
+    minutes: string
+    seconds: string
     isPlaying: boolean
     isFinished: boolean
 }

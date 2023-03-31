@@ -18,6 +18,7 @@ const TaskForm = ({ addTask, onShow, setOnShow }: taskFormProps) => {
     })
 
     const formRef = useRef(null)
+    const inputNameRef = useRef<HTMLInputElement>(null)
 
     useLayoutEffect(() => {
         if (formRef.current) {
@@ -62,7 +63,9 @@ const TaskForm = ({ addTask, onShow, setOnShow }: taskFormProps) => {
             <form className="form flex w-full flex-col text-lg">
                 <label htmlFor="task" className="flex flex-col">
                     <input
+                        ref={inputNameRef}
                         type="text"
+                        autoFocus
                         placeholder="Study English..."
                         onChange={(e) => setName(e.target.value)}
                         value={name}

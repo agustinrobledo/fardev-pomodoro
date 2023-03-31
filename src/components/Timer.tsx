@@ -3,8 +3,8 @@ import Button from "./Button"
 
 interface timerProps {
     time: {
-        minutes: number
-        seconds: number
+        minutes: string
+        seconds: string
         isPlaying: boolean
         isFinished: boolean
     }
@@ -42,7 +42,7 @@ const Timer = ({ time, setTime }: timerProps) => {
 
     return (
         <div className="w-100 flex flex-col items-center justify-center gap-6 p-4">
-            <div className="flex items-center rounded-full border-2 bg-white text-5xl">
+            <div className="flex items-center rounded-full border-2 bg-white text-5xl text-black">
                 <input
                     type="number"
                     name="minutes"

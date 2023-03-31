@@ -1,7 +1,6 @@
 import NewTask from "./NewTask"
 import { IAddedTask, ITask } from "../types/tasks"
 import Task from "./Task"
-import { useRef } from "react"
 
 interface propsTasks {
     tasks: ITask[]

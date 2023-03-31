@@ -51,7 +51,7 @@ const Quote = () => {
             {quote.text ? (
                 <div
                     ref={container}
-                    className="absolute flex h-1/4 w-full flex-col gap-2 bg-red p-10 text-2xl text-black"
+                    className="absolute flex h-1/4 w-full flex-col gap-2 bg-white p-10 text-2xl text-black"
                 >
                     <p>{quote.text}</p>
                     <p>{quote.author ? `- ${quote.author}.` : null}</p>

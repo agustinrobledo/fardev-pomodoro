@@ -9,8 +9,8 @@ interface propsTask {
         name: string
         status: string
         initialTime: {
-            minutes: number
-            seconds: number
+            minutes: string
+            seconds: string
         }
     }
     onUpdate: (t: ITask) => void
