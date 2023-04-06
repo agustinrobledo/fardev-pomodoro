@@ -8,11 +8,11 @@ const Navbar = () => {
             {onShow ? (
                 <Sidebar />
             ) : (
-                <div>
-                    <div>
+                <div className="flex h-14 justify-between border">
+                    <div className="flex items-center justify-center p-4">
                         <h1>FARdev Pomodoro</h1>
                     </div>
-                    <div>
+                    <div className="flex w-10 items-center justify-center border">
                         <button onClick={() => setOnShow(true)}>/.</button>
                     </div>
                 </div>
