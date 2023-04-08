@@ -57,7 +57,7 @@ const TaskContainer = () => {
 
     return (
         <>
-            {error.message.length ? (
+            {error.message.length && task ? (
                 <div>{error.message}</div>
             ) : (
                 <div className="flex h-3/4 flex-col items-center justify-end align-bottom text-4xl">
@@ -65,7 +65,7 @@ const TaskContainer = () => {
                     <Timer
                         time={time}
                         setTime={handleChangeTime}
-                        initialTime={task?.initialTime}
+                        initialTime={task!.initialTime}
                     />
                 </div>
             )}

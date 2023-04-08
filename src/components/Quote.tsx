@@ -20,8 +20,8 @@ const Quote = () => {
             const ctx = gsap.context(() => {
                 gsap.from(container.current, {
                     opacity: 0,
-                    y: -100,
-                    duration: 0.6,
+                    x: -100,
+                    duration: 0.5,
                 })
             }, container)
             return () => ctx.revert()
