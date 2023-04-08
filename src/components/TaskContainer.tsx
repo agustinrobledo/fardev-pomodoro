@@ -62,7 +62,11 @@ const TaskContainer = () => {
             ) : (
                 <div className="flex h-3/4 flex-col items-center justify-end align-bottom text-4xl">
                     <div>{task?.name}</div>
-                    <Timer time={time} setTime={handleChangeTime} />
+                    <Timer
+                        time={time}
+                        setTime={handleChangeTime}
+                        initialTime={task?.initialTime}
+                    />
                 </div>
             )}
         </>

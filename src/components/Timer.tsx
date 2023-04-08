@@ -9,9 +9,13 @@ interface timerProps {
         isFinished: boolean
     }
     setTime: (t: ITime) => void
+    initialTime: {
+        minutes: string
+        seconds: string
+    }
 }
 
-const Timer = ({ time, setTime }: timerProps) => {
+const Timer = ({ time, setTime, initialTime }: timerProps) => {
     const handleChangeTime = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         setTime({ ...time, [name]: Number(value) })
@@ -19,8 +23,8 @@ const Timer = ({ time, setTime }: timerProps) => {
 
     const onReset = () => {
         setTime({
-            minutes: time.minutes,
-            seconds: time.seconds,
+            minutes: initialTime.minutes,
+            seconds: initialTime.seconds,
             isFinished: false,
             isPlaying: true,
         })
