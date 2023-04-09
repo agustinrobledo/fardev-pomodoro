@@ -24,7 +24,9 @@ const Sidebar = ({ setOnShow }: sidebarProps) => {
         <div className="absolute z-10 flex h-screen w-screen flex-col bg-black">
             <div className="flex h-14 justify-between border">
                 <div className="flex items-center justify-center p-4">
-                    <h1>FARdev Pomodoro</h1>
+                    <a href="/">
+                        <h1>FARdev Pomodoro</h1>
+                    </a>
                 </div>
                 <div className="flex w-10 items-center justify-center border">
                     <button onClick={setOnShow}>/.</button>
