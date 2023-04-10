@@ -31,12 +31,22 @@ const Tasks = ({ tasks, onChange }: propsTasks) => {
         onChange(editedTasks)
     }
 
+    const deleteTask = (task: ITask) => {
+        const updatedTasks = tasks.filter((t) => t.id !== task.id)
+        onChange(updatedTasks)
+    }
+
     return (
         <div className="flex h-full flex-col items-center gap-4 py-6">
             {tasks.length ? (
                 <div className="flex h-3/5 w-full flex-col items-center gap-2 overflow-auto">
                     {tasks.map((t) => (
-                        <Task key={t.id} task={t} onUpdate={updateTask} />
+                        <Task
+                            key={t.id}
+                            task={t}
+                            onUpdate={updateTask}
+                            onDelete={deleteTask}
+                        />
                     ))}
                 </div>
             ) : (

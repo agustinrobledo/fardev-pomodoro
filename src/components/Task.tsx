@@ -14,6 +14,7 @@ interface propsTask {
         }
     }
     onUpdate: (t: ITask) => void
+    onDelete: (t: ITask) => void
 }
 
 interface statusOption {
@@ -22,14 +23,14 @@ interface statusOption {
     value: string
 }
 
-const Task = ({ task, onUpdate }: propsTask) => {
+const Task = ({ task, onUpdate, onDelete }: propsTask) => {
     const [statusOptions, setStatusOptions] = useState<statusOption[]>([
         { id: 1, label: "COMPLETE", value: "complete" },
         { id: 2, label: "TODO", value: "todo" },
         { id: 3, label: "DOING", value: "doing" },
     ])
 
-    const container = useRef<HTMLAnchorElement>(null)
+    const container = useRef<HTMLDivElement>(null)
 
     useLayoutEffect(() => {
         if (container.current !== null) {
@@ -46,16 +47,22 @@ const Task = ({ task, onUpdate }: propsTask) => {
     }, [])
 
     return (
-        <Link
+        <div
             ref={container}
-            to={`task/${task.id}`}
-            className="task flex w-4/5 justify-between rounded-lg bg-white p-4 text-black"
+            className="flex w-4/5 items-center justify-between rounded-lg bg-white p-3 text-black"
         >
-            <p className="">{task.name}</p>
-            <p>
-                {task.initialTime.minutes}:{task.initialTime.seconds}
-            </p>
-        </Link>
+            <Link to={`task/${task.id}`}>
+                <p className="">{task.name}</p>
+            </Link>
+            <div className="flex items-center gap-4">
+                <p>
+                    {task.initialTime.minutes}:{task.initialTime.seconds}
+                </p>
+                <button onClick={() => onDelete(task)}>
+                    <strong>X</strong>
+                </button>
+            </div>
+        </div>
     )
 }
 
