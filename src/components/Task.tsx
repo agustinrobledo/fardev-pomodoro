@@ -23,6 +23,8 @@ interface statusOption {
     value: string
 }
 
+//TODO: Make an alert to delete a task!!!
+
 const Task = ({ task, onUpdate, onDelete }: propsTask) => {
     const [statusOptions, setStatusOptions] = useState<statusOption[]>([
         { id: 1, label: "COMPLETE", value: "complete" },
