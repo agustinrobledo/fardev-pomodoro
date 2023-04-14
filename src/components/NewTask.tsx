@@ -7,12 +7,11 @@ interface propsTask {
 }
 
 const NewTask = ({ addTask }: propsTask) => {
-    const [showForm, setShowForm] = useState(true)
     const buttonRef = useRef<HTMLButtonElement>(null)
 
     return (
         <div className="flex h-2/5 w-4/5 flex-col ">
-            <TaskForm setOnShow={setShowForm} addTask={addTask} />
+            <TaskForm addTask={addTask} />
         </div>
     )
 }

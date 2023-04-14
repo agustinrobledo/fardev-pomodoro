@@ -8,6 +8,7 @@ interface propsTasks {
 }
 
 const Tasks = ({ tasks, onChange }: propsTasks) => {
+    //TODO: Generates tasks with UUID to prevent errors when tasks update
     const addTask = (task: IAddedTask) => {
         onChange([
             ...tasks,
