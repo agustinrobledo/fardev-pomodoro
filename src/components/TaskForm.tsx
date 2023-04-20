@@ -51,6 +51,7 @@ const TaskForm = ({ addTask }: taskFormProps) => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (name.length > 0) {
+            //TODO: Agregar uuid
             addTask({ name, initialTime })
             setOnShow(false)
             setName("")
